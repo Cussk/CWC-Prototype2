@@ -8,11 +8,13 @@ public class DestroyOutOfBounds : MonoBehaviour
     private float topBound = 30.0f; //variable for top boundary of game screen
     private float lowerBound = -10.0f; //variable for bottom boundary of game
     private float sideBound = 30.0f; //variable for side boundaries of game screen
+    private GameManager gameManager; //imports GameManager script methods
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //calls the game manager script on game start
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -24,18 +26,18 @@ public class DestroyOutOfBounds : MonoBehaviour
             Destroy(gameObject);
         } else if (transform.position.z < lowerBound)
             {
-                Debug.Log("Game Over!"); //logs to console game over when animal goes out of bounds
-                Destroy(gameObject);
+                gameManager.AddLives(-1); //removes 1 life when animal goes out of bounds
+                Destroy(gameObject); //destroys animal
             }
         else if (transform.position.x > sideBound)
             {
-                Debug.Log("Game Over!"); //logs to console game over when animal goes out of bounds
-                Destroy(gameObject);
+                gameManager.AddLives(-1); //removes 1 life when animal goes out of bounds
+                Destroy(gameObject); //destroys animal
             }
         else if (transform.position.x < -sideBound)
             {
-                Debug.Log("Game Over!"); //logs to console game over when animal goes out of bounds
-                Destroy(gameObject);
+                gameManager.AddLives(-1); //removes 1 life when animal goes out of bounds
+                Destroy(gameObject); //destroys animal
             }
     }
 }
